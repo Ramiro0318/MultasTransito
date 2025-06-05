@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="MultasTransito2.Views.AgregarEditarCiudadanoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MultasTransito2.Views"
+             xmlns:viewmodel="clr-namespace:MultasTransito2.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <!--<UserControl.DataContext>
+        <viewmodel:CiudadanosViewmodel></viewmodel:CiudadanosViewmodel>
+    </UserControl.DataContext>-->
+
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"></Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <DockPanel>
+
+        <TextBlock DockPanel.Dock="Top" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Vista}" Value="{x:Static viewmodel:Vistas.AgregarCiudadano}">
+                            <Setter Property="Text" Value="Agregar ciudadano"></Setter>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Vista}" Value="{x:Static viewmodel:Vistas.EditarCiudadano}">
+                            <Setter Property="Text" Value="Editar ciudadano"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <StackPanel HorizontalAlignment="Center" Margin="20">
+            <WrapPanel Orientation="Vertical">
+                <TextBlock Text="Nombre:" ></TextBlock>
+                <TextBox Text="{Binding Ciudadano.Nombre}"  Width="200" HorizontalAlignment="Stretch"></TextBox>
+            </WrapPanel>
+
+            <WrapPanel Orientation="Vertical">
+                <TextBlock Text="Numero de licencia:" ></TextBlock>
+                <TextBox Text="{Binding Ciudadano.NumeroLicenca}"  Width="200" HorizontalAlignment="Stretch"></TextBox>
+            </WrapPanel>
+
+            <WrapPanel Orientation="Vertical">
+                <TextBlock Text="Edad:" ></TextBlock>
+                <TextBox Text="{Binding Ciudadano.Edad}"  Width="200" HorizontalAlignment="Stretch"></TextBox>
+            </WrapPanel>
+
+
+            <WrapPanel Margin="0 10 0 10">
+                <Button Content="Agregar" Width="80" FontSize="16" Margin="10" Padding="0 4">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+
+                                <DataTrigger Binding="{Binding Vista}" Value="{x:Static viewmodel:Vistas.EditarCiudadano}">
+                                    <Setter Property="Content" Value="Editar"></Setter>
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Content="Cancelar" Command="{Binding CancelarCommand }" Width="80" FontSize="16" Margin="10" Padding="0 4"></Button>
+
+            </WrapPanel>
+
+        </StackPanel>
+
+
+
+    </DockPanel>
+</UserControl>

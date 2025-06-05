@@ -1,0 +1,224 @@
+﻿<UserControl x:Class="MultasTransito2.Views.MultasView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MultasTransito2.Views"
+             xmlns:viewmodel="clr-namespace:MultasTransito2.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="ventanaMultas">
+
+    <UserControl.DataContext>
+        <viewmodel:MultasViewmodel></viewmodel:MultasViewmodel>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+
+        <DockPanel x:Key="Ver">
+            <Grid DockPanel.Dock="Top" Margin="10 5 27 0" Height="40" Background="#FF153067">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Multas" Foreground="LightGray" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Bold"></TextBlock>
+                <Grid Grid.Column="3"  Margin="4">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Command="{Binding OrdenarCommand}" CommandParameter="Asc" Grid.Column="0" Foreground="Black" Background="Transparent" BorderBrush="Transparent" >
+                        <Image Source="/Resources/arrow.png" RenderTransformOrigin="0.5,0.5" >
+                            <Image.RenderTransform>
+                                <RotateTransform Angle="270"></RotateTransform>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Button>
+                    <Button  Command="{Binding OrdenarCommand}" CommandParameter="Des" Grid.Column="1" Foreground="Black" Background="Transparent" BorderBrush="Transparent" >
+                        <Image Source="/Resources/arrow.png" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <RotateTransform Angle="90"></RotateTransform>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Button>
+                    <Button  Command="{Binding ImprimirMultasCommand}" Grid.Column="2" Foreground="Black" Background="Transparent" BorderBrush="Transparent" >
+                        <Image Source="/Resources/printer.png"></Image>
+                    </Button>
+                    <Button Command="{Binding IrAgregarMultaCommand }" Grid.Column="3" Foreground="Black" Background="Transparent" BorderBrush="Transparent" >
+                        <Image Source="/Resources/addGray.png"></Image>
+                    </Button>
+                </Grid>
+
+
+            </Grid>
+
+            <ScrollViewer VerticalScrollBarVisibility="Visible" Height="238" VerticalAlignment="Top">
+                <ItemsControl ItemsSource="{Binding ListaMultas}" Margin="10 0">
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+                            <Grid Background="Gray">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.2*"/>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.35*"/>
+                                    <ColumnDefinition Width="0.1*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Grid.Column="0" Background="LightGray" Margin="5" Grid.ColumnSpan="5"></Border>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Fecha}" FontSize="20" VerticalAlignment="Center" Margin="10 5 5 5"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Text="{Binding IdCiudadano }" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Margin="5"></TextBlock>
+
+                                <TextBlock Grid.Column="2" TextWrapping="Wrap" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Run Text="Sanción Pecuniaria"/>
+                                    <Run Text="{Binding SancionPecuniaria, StringFormat='{}{0:C2}'}" Foreground="#FE7743" FontSize="16"/>
+                                </TextBlock>
+
+                                <TextBlock Text="{Binding Motivo}" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="20" Margin="5"></TextBlock>
+
+                                <Grid Grid.Column="4" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="0 3 0 0 ">
+                                        <Hyperlink Command="{Binding ElementName=ventanaMultas, Path=DataContext.IrEditarMultaCommand}" CommandParameter="{Binding .}" Foreground="Black" FontSize="18" FontWeight="Medium" TextDecorations="None">Editar</Hyperlink>
+                                    </TextBlock>
+                                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0 0 0 4">
+                                        <Hyperlink Command="{Binding ElementName=ventanaMultas, Path=DataContext.IrEliminarMultaCommand}" CommandParameter="{Binding .}" Foreground="Black" FontSize="18" FontWeight="Medium" TextDecorations="None">Eliminar</Hyperlink>
+                                    </TextBlock>
+                                </Grid>
+
+
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel x:Key="Agregar" Height="285">
+
+            <TextBlock DockPanel.Dock="Top" Text="Agregar multa" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+
+            <ScrollViewer>
+
+                <StackPanel HorizontalAlignment="Center" Margin="10">
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Fecha:" FontSize="20"></TextBlock>
+                        <TextBox Text="{Binding Multa.Fecha}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Numero de Licencia:" FontSize="20"></TextBlock>
+                        <TextBox Text="{Binding Multa.IdCiudadano}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Motivo de la multa:" FontSize="20"></TextBlock>
+                        <TextBox Text="{Binding Multa.Motivo}" MaxLines="5" FontSize="20" Width="200" Height="25" HorizontalAlignment="Stretch"></TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Sanción:" FontSize="20"></TextBlock>
+                        <TextBox Text="{Binding Multa.SancionPecuniaria}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                    </WrapPanel>
+
+
+                    <WrapPanel Margin="0 10 0 10">
+                        <Button Content="Agregar" Command="{Binding AgregarMultaCommand}" Width="80" FontSize="16" Margin="10" Padding="0 4"></Button>
+                        <Button Content="Cancelar" Command="{Binding CancelarCommand}" Width="80" FontSize="16" Margin="10" Padding="0 4"></Button>
+                    </WrapPanel>
+
+                    <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Width="200" FontSize="18" Foreground="Red" TextWrapping="Wrap"></TextBlock>
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </DockPanel>
+
+        <DockPanel x:Key="Editar" Height="285">
+
+            <TextBlock DockPanel.Dock="Top" Text="Editar multa" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"></TextBlock>
+
+            <ScrollViewer>
+
+                <StackPanel HorizontalAlignment="Center" Margin="10">
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Nombre:" FontSize="20"></TextBlock>
+                        <TextBox Text="{Binding Multa.Fecha}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Numero de Licencia:" FontSize="20"></TextBlock>
+                        <TextBox Text="{Binding Multa.IdCiudadano}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Motivo de la multa:" FontSize="20"></TextBlock>
+                        <TextBox Text="{Binding Multa.Motivo}" MaxLines="5" FontSize="20" Width="200" Height="25" HorizontalAlignment="Stretch"></TextBox>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Vertical">
+                        <TextBlock Text="Sanción:" FontSize="20"></TextBlock>
+                        <TextBox Text="{Binding Multa.SancionPecuniaria}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                    </WrapPanel>
+
+
+                    <WrapPanel Margin="0 10 0 0">
+                        <Button Content="Editar" Command="{Binding EditarMultaCommand}" Width="80" FontSize="16" Margin="10" Padding="0 4"></Button>
+                        <Button Content="Cancelar" Command="{Binding CancelarCommand}" Width="80" FontSize="16" Margin="10" Padding="0 4"></Button>
+                    </WrapPanel>
+
+                    <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Width="200" FontSize="18" Foreground="Red" TextWrapping="Wrap"></TextBlock>
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </DockPanel>
+
+        <WrapPanel x:Key="Eliminar"  Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <TextBlock Text="¿Desea eliminar multa?" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="15" TextWrapping="Wrap"></TextBlock>
+
+            <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="Eliminar" Command="{Binding EliminarMultaCommand}" Width="100" FontSize="22" FontWeight="Bold" Margin="5" Padding="0 5"></Button>
+                <Button Content="Cancelar" Command="{Binding CancelarCommand}" Width="100" FontSize="22" FontWeight="Bold" Margin="5" Padding="0 5"></Button>
+            </WrapPanel>
+
+        </WrapPanel>
+
+    </UserControl.Resources>
+
+    <ContentControl>
+        <ContentControl.Style>
+            <Style TargetType="ContentControl">
+                <Setter Property="Content" Value="{StaticResource Ver}"></Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Modo}" Value="Agregar">
+                        <Setter Property="Content" Value="{StaticResource Agregar}"></Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Modo}" Value="Editar">
+                        <Setter Property="Content" Value="{StaticResource Editar}"></Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Modo}" Value="Eliminar">
+                        <Setter Property="Content" Value="{StaticResource Eliminar}"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ContentControl.Style>
+    </ContentControl>
+
+</UserControl>
