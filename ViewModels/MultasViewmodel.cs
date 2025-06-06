@@ -140,7 +140,6 @@ namespace MultasTransito2.ViewModels
         private void IrEliminarMulta(Multa m)
         {
             Multa = m;
-            //Multa = m;
             Modo = "Eliminar";
             //Vista = Vistas.Eliminar;
             Actualizar();

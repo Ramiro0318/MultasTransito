@@ -84,25 +84,27 @@ namespace MultasTransito2.Services
                 tabla.WidthPercentage = 100;
                 tabla.SetWidths(new float[] { 7f, 3f });
 
-                PdfPCell encabezadoCantidadEmpleados = new PdfPCell(new Phrase("Nombre completo", fuenteCelda));
-                PdfPCell encabezadoMontoPagado = new PdfPCell(new Phrase("No. Licencia", fuenteCelda));
+                documentoPDF.Add(new Paragraph("\n"));
 
-                encabezadoCantidadEmpleados.BackgroundColor = BaseColor.LIGHT_GRAY;
-                encabezadoMontoPagado.BackgroundColor = BaseColor.LIGHT_GRAY;
-                encabezadoMontoPagado.HorizontalAlignment = Element.ALIGN_CENTER;
-                encabezadoCantidadEmpleados.HorizontalAlignment = Element.ALIGN_CENTER;
+                PdfPCell encabezadoNombreCompleto = new PdfPCell(new Phrase("Nombre completo", fuenteCelda));
+                PdfPCell encabezadoNoLicencia = new PdfPCell(new Phrase("No. Licencia", fuenteCelda));
 
-                encabezadoMontoPagado.VerticalAlignment = Element.ALIGN_CENTER;
-                encabezadoCantidadEmpleados.VerticalAlignment = Element.ALIGN_CENTER;
+                encabezadoNombreCompleto.BackgroundColor = BaseColor.LIGHT_GRAY;
+                encabezadoNombreCompleto.HorizontalAlignment = Element.ALIGN_CENTER;
+                encabezadoNoLicencia.BackgroundColor = BaseColor.LIGHT_GRAY;
+                encabezadoNoLicencia.HorizontalAlignment = Element.ALIGN_CENTER;
 
-                encabezadoCantidadEmpleados.PaddingTop = 5;
-                encabezadoMontoPagado.PaddingTop = 5;
+                encabezadoNoLicencia.VerticalAlignment = Element.ALIGN_CENTER;
+                encabezadoNombreCompleto.VerticalAlignment = Element.ALIGN_CENTER;
 
-                encabezadoCantidadEmpleados.PaddingBottom = 7.5f;
-                encabezadoMontoPagado.PaddingBottom = 7.5f;
+                encabezadoNombreCompleto.PaddingTop = 5;
+                encabezadoNoLicencia.PaddingTop = 5;
 
-                tabla.AddCell(encabezadoCantidadEmpleados);
-                tabla.AddCell(encabezadoMontoPagado);
+                encabezadoNombreCompleto.PaddingBottom = 7.5f;
+                encabezadoNoLicencia.PaddingBottom = 7.5f;
+
+                tabla.AddCell(encabezadoNombreCompleto);
+                tabla.AddCell(encabezadoNoLicencia);
 
                 tabla.AddCell(new PdfPCell(new Phrase(c.NombreCiudadano, fuenteCeldaBold))
                 {

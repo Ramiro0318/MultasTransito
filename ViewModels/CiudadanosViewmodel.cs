@@ -188,8 +188,6 @@ namespace MultasTransito2.ViewModels
 
         private void ImprimirCiudadanos()
         {
-            //ListaMultasPorCiudadano = repoCiudadano.GetMultasPorCiudadanoView().ToList();
-
             ReporteCiudadanos x = new ReporteCiudadanos();
             byte[] pdfBytes = x.GetReporteSecciones(repoCiudadano.GetMultasPorCiudadanoView().ToList());
 

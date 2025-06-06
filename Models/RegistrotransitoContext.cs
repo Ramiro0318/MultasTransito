@@ -5,13 +5,13 @@ using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace MultasTransito2.Models;
 
-public partial class RegistrotransitoContext : DbContext
+public partial class RegistroTransitoContext : DbContext
 {
-    public RegistrotransitoContext()
+    public RegistroTransitoContext()
     {
     }
 
-    public RegistrotransitoContext(DbContextOptions<RegistrotransitoContext> options)
+    public RegistroTransitoContext(DbContextOptions<RegistroTransitoContext> options)
         : base(options)
     {
     }
@@ -24,7 +24,7 @@ public partial class RegistrotransitoContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;user=root;database=registrotransito;password=root;port=3306", Microsoft.EntityFrameworkCore.ServerVersion.Parse("9.0.1-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;user=root;database=RegistroTransito;password=root;port=3306", Microsoft.EntityFrameworkCore.ServerVersion.Parse("9.0.1-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

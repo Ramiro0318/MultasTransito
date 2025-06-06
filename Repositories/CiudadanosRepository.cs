@@ -12,7 +12,7 @@ namespace MultasTransito2.Repositories
 {
     public class CiudadanosRepository
     {
-        RegistrotransitoContext Context = new();
+        RegistroTransitoContext Context = new();
 
         public IEnumerable<MultasPorCiudadanoDTO> GetMultasPorCiudadanoView()
         {
@@ -35,16 +35,16 @@ namespace MultasTransito2.Repositories
 
             //return multasAgrupadas;
 
-            var multasAgrupadas = Context.Ciudadano.Include(x => x.Multa).Select( c => new MultasPorCiudadanoDTO
+            var multasAgrupadas = Context.Ciudadano.Where(x => x.Eliminado == false).Include(x => x.Multa).Select( c => new MultasPorCiudadanoDTO
             {
                 NumeroLicenca = c.NumeroLicenca,
                 NombreCiudadano = c.Nombre,
-                Multas = c.Multa.Select(m => new MultasDTO
+                Multas = c.Multa.Where(c => c.Eliminado == false).Select(m => new MultasDTO
                 {
                     IdMulta = m.Id,
                     Fecha = m.Fecha,
                     Motivo = m.Motivo,
-                    SancionPecuniaria = m.SancionPecuniaria
+                    SancionPecuniaria = m.SancionPecuniaria,
                 }).ToList()
             }
             );
@@ -53,14 +53,12 @@ namespace MultasTransito2.Repositories
 
         public IEnumerable<Ciudadano> GetAll()
         {
-            return Context.Ciudadano;
+            return Context.Ciudadano.Where(x => x.Eliminado == false);
         }
         public IEnumerable<Ciudadano> Filtrar(string filtro)
         {
-            return Context.Ciudadano.Where(x => x.NumeroLicenca.Contains(filtro) || x.Nombre.Contains(filtro));
+            return Context.Ciudadano.Where(x => x.Eliminado == false && x.NumeroLicenca.Contains(filtro) || x.Eliminado == false && x.Nombre.Contains(filtro));
         }
-
-
 
         public Ciudadano GetCiudadanoByNumero(string licencia)
         {
@@ -81,7 +79,8 @@ namespace MultasTransito2.Repositories
 
         public void EliminarCiudadano(Ciudadano c)
         {
-            Context.Ciudadano.Remove(c);
+            c.Eliminado = true;
+            Context.Ciudadano.Update(c);
             Context.SaveChanges();
         }
 

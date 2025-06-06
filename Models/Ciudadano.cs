@@ -13,6 +13,7 @@ public partial class Ciudadano
 
     public int MultasAcargo { get; set; }
 
+    public bool Eliminado { get; set; }
+
     public virtual ICollection<Multa> Multa { get; set; } = new List<Multa>();
 }
-

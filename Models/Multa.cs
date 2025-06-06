@@ -15,5 +15,7 @@ public partial class Multa
 
     public string IdCiudadano { get; set; } = null!;
 
+    public bool Eliminado { get; set; }
+
     public virtual Ciudadano IdCiudadanoNavigation { get; set; } = null!;
 }

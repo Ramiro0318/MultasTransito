@@ -11,11 +11,11 @@ namespace MultasTransito2.Repositories
 {
     public class MultasRepository
     {
-        RegistrotransitoContext Context = new();
+        RegistroTransitoContext Context = new();
         public IEnumerable<Multa> GetMultas()
         {
-            return Context.Multa.OrderBy(x => x.Fecha);
-            //return Context.Multa;
+            return Context.Multa.Where(x => x.Eliminado == false).OrderBy(x => x.Fecha);
+
         }
 
         public Multa GetMultaById(int id)
@@ -68,7 +68,8 @@ namespace MultasTransito2.Repositories
 
         public void EliminarMulta(Multa m)
         {
-            Context.Multa.Remove(m);
+            m.Eliminado = true;
+            Context.Multa.Update(m);
             Context.SaveChanges();
         }
 

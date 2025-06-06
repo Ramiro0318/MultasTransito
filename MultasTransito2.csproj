@@ -12,6 +12,8 @@
     <None Remove="Resources\add.png" />
     <None Remove="Resources\addGray.png" />
     <None Remove="Resources\arrow.png" />
+    <None Remove="Resources\delete.png" />
+    <None Remove="Resources\edit.png" />
     <None Remove="Resources\printer.png" />
     <None Remove="Resources\search.png" />
     <None Remove="Resources\TransitoLogo.png" />
@@ -35,6 +37,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\edit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\printer.png">

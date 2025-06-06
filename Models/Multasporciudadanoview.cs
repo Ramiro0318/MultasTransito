@@ -1,5 +1,4 @@
-﻿using MultasTransito2.Models.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace MultasTransito2.Models;
@@ -17,6 +16,4 @@ public partial class Multasporciudadanoview
     public string Motivo { get; set; } = null!;
 
     public decimal SancionPecuniaria { get; set; }
-
-    public List<MultasDTO> Multas { get; set; } = new();
 }

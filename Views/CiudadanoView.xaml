@@ -31,7 +31,7 @@
                         <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         <ColumnDefinition Width="40"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding Filtro}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="3" FontSize="18"></TextBox>
+                    <TextBox Text="{Binding Filtro}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="2" FontSize="18"></TextBox>
                     <Button Command="{Binding FiltrarCommand}" Grid.Column="1" HorizontalAlignment="Right" Foreground="Black" Background="Transparent" BorderBrush="Transparent">
                         <Image Source="/Resources/search.png"></Image>
                     </Button>
@@ -82,17 +82,25 @@
                                 </TextBlock>
 
                                 <Grid Grid.Column="4" VerticalAlignment="Center">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="0 3 0 0 ">
+                                    <Button Grid.Column="0" Command="{Binding ElementName=ventanaCiudadanos, Path=DataContext.IrEditarCommand}" CommandParameter="{Binding .}" HorizontalAlignment="Center" Margin="3 3 3 3" Background="Transparent" BorderBrush="Transparent">
+                                        <Image Source="/Resources/edit.png" Width="27"></Image>
+                                    </Button>
+
+                                    <Button Grid.Column="1" Command="{Binding ElementName=ventanaCiudadanos, Path=DataContext.IrEliminarCommand}" CommandParameter="{Binding .}" HorizontalAlignment="Center" Margin="3 3 3 3" Background="Transparent" BorderBrush="Transparent">
+                                        <Image Source="/Resources/delete.png" Width="25"></Image>
+                                    </Button>
+
+                                    <!--<TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="0 3 0 0 ">
                                         <Hyperlink Command="{Binding ElementName=ventanaCiudadanos, Path=DataContext.IrEditarCommand}" CommandParameter="{Binding .}" Foreground="Black" FontSize="18" FontWeight="Medium" TextDecorations="None">Editar</Hyperlink>
-                                    </TextBlock>
-                                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0 0 0 4">
+                                    </TextBlock>-->
+                                    <!--<TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0 0 0 4">
                                         <Hyperlink Command="{Binding ElementName=ventanaCiudadanos, Path=DataContext.IrEliminarCommand}" CommandParameter="{Binding .}" Foreground="Black" FontSize="18" FontWeight="Medium" TextDecorations="None">Eliminar</Hyperlink>
-                                    </TextBlock>
+                                    </TextBlock>-->
                                 </Grid>
 
 
@@ -112,26 +120,26 @@
                 <StackPanel HorizontalAlignment="Center" Margin="10">
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="Nombre:" FontSize="20" ></TextBlock>
-                        <TextBox Text="{Binding Ciudadano.Nombre}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBox Text="{Binding Ciudadano.Nombre}" FontSize="20" Width="400" HorizontalAlignment="Stretch"></TextBox>
                     </WrapPanel>
 
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="Numero de licencia:" FontSize="20"></TextBlock>
-                        <TextBox Text="{Binding Ciudadano.NumeroLicenca}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBox Text="{Binding Ciudadano.NumeroLicenca}" FontSize="20" Width="400" HorizontalAlignment="Stretch"></TextBox>
                     </WrapPanel>
 
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="Edad:" FontSize="20"></TextBlock>
-                        <TextBox Text="{Binding Ciudadano.Edad}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBox Text="{Binding Ciudadano.Edad}" FontSize="20" Width="400" HorizontalAlignment="Stretch"></TextBox>
                     </WrapPanel>
 
 
                     <WrapPanel Margin="0 10 0 00">
-                        <Button Content="Agregar" Command="{Binding AgregarCommand}" Width="80" FontSize="16" Margin="10" Padding="0 4"></Button>
-                        <Button Content="Cancelar" Command="{Binding CancelarCommand }" Width="80" FontSize="16" Margin="10" Padding="0 4"></Button>
+                        <Button Content="Agregar" Command="{Binding AgregarCommand}" Width="140" FontSize="16" Margin="10" Padding="0 4"></Button>
+                        <Button Content="Cancelar" Command="{Binding CancelarCommand }" Width="140" FontSize="16" Margin="10" Padding="0 4"></Button>
                     </WrapPanel>
 
-                    <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Width="200" FontSize="18" Foreground="Red" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Width="400" FontSize="18" Foreground="Red" TextWrapping="Wrap"></TextBlock>
 
                 </StackPanel>
             </ScrollViewer>
@@ -148,25 +156,25 @@
 
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="Nombre:" FontSize="20"></TextBlock>
-                        <TextBox Text="{Binding Ciudadano.Nombre}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBox Text="{Binding Ciudadano.Nombre}" FontSize="20" Width="400" HorizontalAlignment="Stretch"></TextBox>
                     </WrapPanel>
 
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="Numero de licencia:" FontSize="20"></TextBlock>
-                        <TextBox Text="{Binding Ciudadano.NumeroLicenca}" FontSize="20" Width="200" HorizontalAlignment="Stretch" IsEnabled="False"></TextBox>
+                        <TextBox Text="{Binding Ciudadano.NumeroLicenca}" FontSize="20" Width="400" HorizontalAlignment="Stretch" IsEnabled="False"></TextBox>
                     </WrapPanel>
 
                     <WrapPanel Orientation="Vertical">
                         <TextBlock Text="Edad:" FontSize="20" ></TextBlock>
-                        <TextBox Text="{Binding Ciudadano.Edad}" FontSize="20" Width="200" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBox Text="{Binding Ciudadano.Edad}" FontSize="20" Width="400" HorizontalAlignment="Stretch"></TextBox>
                     </WrapPanel>
 
                     <WrapPanel Margin="0 10 0 0">
-                        <Button Content="Editar" Command="{Binding EditarCommand}" Width="80" FontSize="16" Margin="10 10 10 0" Padding="0 4"></Button>
-                        <Button Content="Cancelar" Command="{Binding CancelarCommand}" Width="80" FontSize="16" Margin="10 10 10 0" Padding="0 4"></Button>
+                        <Button Content="Editar" Command="{Binding EditarCommand}" Width="140" FontSize="16" Margin="10 10 10 0" Padding="0 4"></Button>
+                        <Button Content="Cancelar" Command="{Binding CancelarCommand}" Width="140" FontSize="16" Margin="10 10 10 0" Padding="0 4"></Button>
                     </WrapPanel>
 
-                    <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Width="200" FontSize="16" Foreground="Red" TextWrapping="Wrap"></TextBlock>
+                    <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Width="400" FontSize="16" Foreground="Red" TextWrapping="Wrap"></TextBlock>
 
                 </StackPanel>
             </ScrollViewer>
@@ -178,8 +186,8 @@
             <TextBlock Text="¿Desea eliminar ciudadano?" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Margin="15" TextWrapping="Wrap"></TextBlock>
 
             <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="Eliminar" Command="{Binding EliminarCommand}" Width="100" FontSize="22" FontWeight="Bold" Margin="5" Padding="0 5"></Button>
-                <Button Content="Cancelar" Command="{Binding CancelarCommand}" Width="100" FontSize="22" FontWeight="Bold" Margin="5" Padding="0 5"></Button>
+                <Button Content="Eliminar" Command="{Binding EliminarCommand}" Width="140" FontSize="24" FontWeight="Bold" Margin="5" Padding="0 5"></Button>
+                <Button Content="Cancelar" Command="{Binding CancelarCommand}" Width="140" FontSize="24" FontWeight="Bold" Margin="5" Padding="0 5"></Button>
             </WrapPanel>
             <TextBlock Text="{Binding Error}" HorizontalAlignment="Center" Width="400" FontSize="18" Foreground="Red" TextWrapping="Wrap"></TextBlock>
 
